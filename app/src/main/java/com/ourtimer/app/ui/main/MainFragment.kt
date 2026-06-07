@@ -243,17 +243,11 @@ class MainFragment : Fragment() {
         wallOfDays.setDays(challenge.days, elapsedDays.toFloat())
 
         // 6. Update Milestone indicators
-        val nextMilestone = milestones.firstOrNull { it > elapsedDays }
-        if (nextMilestone != null) {
-            val daysAway = ceil(nextMilestone - elapsedDays).toInt()
-            tvNextMilestone.text = "⚡ Next milestone: Day $nextMilestone — $daysAway days away"
-            tvNextMilestone.setTextColor(Color.parseColor("#fbbf24"))
-            tvNextMilestone.visibility = View.VISIBLE
-        } else {
-            tvNextMilestone.text = "🏅 All milestones complete!"
-            tvNextMilestone.setTextColor(Color.parseColor("#fbbf24"))
-            tvNextMilestone.visibility = View.VISIBLE
-        }
+        tvNextMilestone.text = "All milestones complete!"
+        tvNextMilestone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_medal, 0, 0, 0)
+        tvNextMilestone.compoundDrawablePadding = (6 * resources.displayMetrics.density).toInt()
+        tvNextMilestone.setTextColor(Color.parseColor("#fbbf24"))
+        tvNextMilestone.visibility = View.VISIBLE
 
         // Check if any milestone has been reached but not yet shown
         checkMilestoneDialogs(challenge, elapsedDays)

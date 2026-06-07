@@ -88,12 +88,15 @@
             android:id="@+id/tv_next_milestone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:text="All milestones complete!"
+            android:textSize="13sp"
             android:textColor="@color/amber_light"
             android:letterSpacing="0.15"
             android:fontFamily="monospace"
             android:layout_marginTop="4dp"
-            android:alpha="0.8" />
+            android:alpha="0.8"
+            android:drawableStart="@drawable/ic_medal"
+            android:drawablePadding="6dp" />
 
         <!-- Stats Cards -->
         <LinearLayout
