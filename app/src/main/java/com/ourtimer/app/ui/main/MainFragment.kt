@@ -219,8 +219,8 @@ class MainFragment : Fragment() {
 
         // Update progress rings
         progressRing.setProgress(
-            outerProgress = outerProgress,
-            innerProgress = innerProgress,
+            outer = outerProgress,
+            inner = innerProgress,
             isCompleted = isCompleted,
             minutesText = minText,
             secondsText = secText,
