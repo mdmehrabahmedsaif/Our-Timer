@@ -17,6 +17,8 @@ import com.ourtimer.app.data.ChallengeRepository
 import com.ourtimer.app.ui.add.AddFragment
 import com.ourtimer.app.ui.main.MainFragment
 
+import com.ourtimer.app.ui.dialogs.DeleteConfirmDialog
+
 class ListFragment : Fragment() {
 
     private lateinit var repository: ChallengeRepository
@@ -93,9 +95,8 @@ class ListFragment : Fragment() {
     }
 
     private fun showDeleteConfirmation(challenge: Challenge) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.delete_confirm)
-            .setPositiveButton(R.string.yes) { _, _ ->
+        val dialog = DeleteConfirmDialog.newInstance(object : DeleteConfirmDialog.DeleteConfirmListener {
+            override fun onDeleteConfirmed() {
                 repository.delete(challenge.id)
                 val updated = getSortedChallenges()
                 if (updated.isEmpty()) {
@@ -105,7 +106,7 @@ class ListFragment : Fragment() {
                     updateAddButtonVisibility()
                 }
             }
-            .setNegativeButton(R.string.no, null)
-            .show()
+        })
+        dialog.show(parentFragmentManager, "delete_confirm_dialog")
     }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FA030712"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Impulsive Decision?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/red_light"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tv_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="চ্যালেঞ্জটি মুছে ফেলার আগে আপনাকে বাধ্যতামূলক ৫ মিনিট অপেক্ষা করতে হবে। শান্ত মাথায় ভাবুন আপনি কেন এটি শুরু করেছিলেন।"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Countdown Timer Display -->
+    <FrameLayout
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/bg_timer_circle"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:id="@+id/tv_countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="5:00"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/red_light"
+            android:fontFamily="monospace" />
+    </FrameLayout>
+
+    <!-- Delete anyway Button -->
+    <TextView
+        android:id="@+id/btn_delete_anyway"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_struggling"
+        android:text="Delete anyway (5:00)"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_muted"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_marginBottom="12dp"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <!-- Cancel Button -->
+    <TextView
+        android:id="@+id/btn_cancel_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="আমি চ্যালেঞ্জটি রাখব (Cancel)"
+        android:textSize="13sp"
+        android:textColor="@color/text_primary"
+        android:fontFamily="monospace"
+        android:padding="12dp" />
+
+</LinearLayout>
