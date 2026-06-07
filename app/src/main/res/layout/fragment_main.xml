@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All milestones complete!"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:textColor="@color/amber_light"
             android:letterSpacing="0.15"
             android:fontFamily="monospace"
