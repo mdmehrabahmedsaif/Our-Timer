@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Our Timer</string>
+
+    <!-- Main Screen -->
+    <string name="label_challenge">CHALLENGE</string>
+    <string name="label_next_hour_in">NEXT HOUR IN</string>
+    <string name="label_min_in_hour">MIN IN HOUR</string>
+    <string name="label_total">TOTAL</string>
+    <string name="label_today">TODAY</string>
+    <string name="label_wall_of_days">WALL OF DAYS</string>
+    <string name="btn_struggling">I\'m Struggling</string>
+    <string name="label_ends">ENDS %s</string>
+    <string name="label_next_milestone">NEXT MILESTONE: DAY %d</string>
+
+    <!-- List Screen -->
+    <string name="title_challenges">Challenges</string>
+    <string name="btn_add_challenge">+ Add Challenge</string>
+    <string name="label_day_count">%d DAYS</string>
+
+    <!-- Add Screen -->
+    <string name="title_new_challenge">New Challenge</string>
+    <string name="label_challenge_name">Challenge Name</string>
+    <string name="label_days">Days (max 365)</string>
+    <string name="label_alter_ego">Your Alter Ego</string>
+    <string name="hint_name">e.g. Gaming, YouTube…</string>
+    <string name="hint_days">60</string>
+    <string name="hint_alter">The Champion, Iron Will…</string>
+    <string name="btn_sign_contract">SIGN THE CONTRACT →</string>
+    <string name="alter_champion">The Champion</string>
+    <string name="alter_iron_will">Iron Will</string>
+    <string name="alter_warrior">The Warrior</string>
+    <string name="alter_silent_storm">Silent Storm</string>
+
+    <!-- Contract -->
+    <string name="contract_text">আমি প্রতিজ্ঞা করছি যে %1$s থেকে %2$d দিন দূরে থাকব।</string>
+
+    <!-- Milestone -->
+    <string name="milestone_title">%d Days!</string>
+    <string name="milestone_7">তুমি প্রথম সপ্তাহ পার করেছ।</string>
+    <string name="milestone_15">১৫ দিন! তুমি শক্তিশালী হচ্ছ।</string>
+    <string name="milestone_21">২১ দিন — একটা অভ্যাস তৈরি হয়ে গেছে!</string>
+    <string name="milestone_30">এক মাস! তুমি অসাধারণ।</string>
+    <string name="milestone_45">৪৫ দিন! তোমার ইচ্ছাশক্তি অটুট।</string>
+    <string name="milestone_60">৬০ দিন! তুমি একজন চ্যাম্পিয়ন।</string>
+    <string name="milestone_90">৯০ দিন! তোমার জীবন বদলে গেছে।</string>
+    <string name="milestone_120">১২০ দিন! তুমি অজেয়।</string>
+    <string name="milestone_180">৬ মাস! তুমি একটি কিংবদন্তি।</string>
+    <string name="milestone_365">১ বছর! তুমি ইতিহাস তৈরি করেছ।</string>
+    <string name="btn_continue">Continue →</string>
+
+    <!-- Struggling -->
+    <string name="struggling_title">তুমি এখন ঠিক সেই মুহূর্তে আছ যেখানে বেশিরভাগ মানুষ হেরে যায়।</string>
+    <string name="struggling_sub">কিন্তু তুমি এখনও এখানে আছ।</string>
+    <string name="struggling_breath">৩টা deep breath নাও</string>
+    <string name="rule_10_min">১০ মিনিট পরে কেমন feel করব?</string>
+    <string name="rule_10_day">১০ দিন পরে কেমন feel করব?</string>
+    <string name="rule_10_month">১০ মাস পরে কেমন feel করব?</string>
+    <string name="btn_i_will_pass">আমি পার করব →</string>
+
+    <!-- Why -->
+    <string name="why_title">কেন এই challenge নিয়েছ?</string>
+    <string name="why_sub">নিজের কারণ লেখো — এটা তোমাকে সবচেয়ে বেশি শক্তি দেবে।</string>
+    <string name="why_hint">আমি এই challenge নিয়েছি কারণ…</string>
+    <string name="btn_save">Save →</string>
+
+    <!-- General -->
+    <string name="btn_back">← Back</string>
+    <string name="delete_confirm">Delete this challenge?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="validation_name">Please enter a challenge name</string>
+    <string name="validation_days">Please enter days (1–365)</string>
+    <string name="validation_alter">Please choose an alter ego</string>
+    <string name="completed">COMPLETED!</string>
+</resources>

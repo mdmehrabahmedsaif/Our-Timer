@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_challenge"
+                    android:textSize="9sp"
+                    android:textColor="@color/text_dim"
+                    android:letterSpacing="0.25"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    android:id="@+id/tv_alter_ego"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/indigo_light"
+                    android:letterSpacing="0.05"
+                    android:fontFamily="monospace" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_icon_btn"
+                android:src="@drawable/ic_menu"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:contentDescription="Menu" />
+        </RelativeLayout>
+
+        <!-- Challenge Pills -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="4dp">
+
+            <LinearLayout
+                android:id="@+id/pill_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center" />
+        </HorizontalScrollView>
+
+        <!-- Progress Rings -->
+        <com.ourtimer.app.ui.main.ProgressRingView
+            android:id="@+id/progress_ring"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Next Milestone -->
+        <TextView
+            android:id="@+id/tv_next_milestone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/amber_light"
+            android:letterSpacing="0.15"
+            android:fontFamily="monospace"
+            android:layout_marginTop="4dp"
+            android:alpha="0.8" />
+
+        <!-- Stats Cards -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <!-- MIN IN HOUR - Full Width -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_emerald"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_min_in_hour"
+                    android:textSize="9sp"
+                    android:textColor="@color/emerald"
+                    android:letterSpacing="0.22"
+                    android:fontFamily="monospace" />
+
+                <TextView
+                    android:id="@+id/tv_min_in_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00%"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/emerald"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <!-- TOTAL + TODAY Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_card_indigo"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:layout_marginEnd="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_total"
+                        android:textSize="9sp"
+                        android:textColor="@color/indigo_light"
+                        android:letterSpacing="0.22"
+                        android:fontFamily="monospace" />
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.000%"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/indigo_light"
+                        android:fontFamily="monospace"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_card_amber"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:layout_marginStart="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_today"
+                        android:textSize="9sp"
+                        android:textColor="@color/amber_light"
+                        android:letterSpacing="0.22"
+                        android:fontFamily="monospace" />
+
+                    <TextView
+                        android:id="@+id/tv_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00%"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/amber_light"
+                        android:fontFamily="monospace"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Wall of Days -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_wall_of_days"
+                android:textSize="9sp"
+                android:textColor="@color/text_dim"
+                android:letterSpacing="0.2"
+                android:fontFamily="monospace"
+                android:layout_marginBottom="8dp" />
+
+            <com.ourtimer.app.ui.main.WallOfDaysView
+                android:id="@+id/wall_of_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Struggling Button -->
+        <TextView
+            android:id="@+id/btn_struggling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_struggling"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/btn_struggling"
+            android:textSize="11sp"
+            android:textColor="@color/red_light"
+            android:letterSpacing="0.15"
+            android:fontFamily="monospace"
+            android:textAllCaps="true"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/ic_bolt"
+            android:drawablePadding="8dp" />
+
+        <!-- Footer -->
+        <TextView
+            android:id="@+id/tv_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="9sp"
+            android:textColor="@color/text_dark"
+            android:letterSpacing="0.15"
+            android:fontFamily="monospace"
+            android:textAllCaps="true"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="32dp">
+
+        <!-- Top Bar -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_icon_btn"
+                android:src="@drawable/ic_back"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/title_new_challenge"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:letterSpacing="0.15"
+                android:fontFamily="monospace"
+                android:textAllCaps="true" />
+        </RelativeLayout>
+
+        <!-- Challenge Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_challenge_name"
+            android:textSize="10sp"
+            android:textColor="@color/text_muted"
+            android:letterSpacing="0.2"
+            android:fontFamily="monospace"
+            android:textAllCaps="true"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inp_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:hint="@string/hint_name"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_muted"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            android:padding="14dp"
+            android:maxLength="30"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Days -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_days"
+            android:textSize="10sp"
+            android:textColor="@color/text_muted"
+            android:letterSpacing="0.2"
+            android:fontFamily="monospace"
+            android:textAllCaps="true"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inp_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:hint="@string/hint_days"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_muted"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            android:padding="14dp"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Alter Ego -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_alter_ego"
+            android:textSize="10sp"
+            android:textColor="@color/text_muted"
+            android:letterSpacing="0.2"
+            android:fontFamily="monospace"
+            android:textAllCaps="true"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/inp_alter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_input"
+            android:hint="@string/hint_alter"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_muted"
+            android:textSize="14sp"
+            android:fontFamily="monospace"
+            android:padding="14dp"
+            android:maxLength="20"
+            android:inputType="text" />
+
+        <!-- Alter Ego Quick Select -->
+        <LinearLayout
+            android:id="@+id/alter_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/opt_champion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill"
+                android:text="@string/alter_champion"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="monospace"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/opt_iron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill"
+                android:text="@string/alter_iron_will"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="monospace"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/opt_warrior"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill"
+                android:text="@string/alter_warrior"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="monospace"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp" />
+        </LinearLayout>
+
+        <!-- Contract Preview -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_contract"
+            android:padding="14dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tv_contract"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="monospace"
+                android:lineSpacingMultiplier="1.7" />
+        </LinearLayout>
+
+        <!-- Sign Button -->
+        <TextView
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_primary"
+            android:text="@string/btn_sign_contract"
+            android:textSize="14sp"
+            android:textColor="@color/text_primary"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.1"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp" />
+
+    </LinearLayout>
+</ScrollView>

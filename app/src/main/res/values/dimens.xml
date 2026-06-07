@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_padding">20dp</dimen>
+    <dimen name="card_radius">14dp</dimen>
+    <dimen name="pill_radius">20dp</dimen>
+    <dimen name="btn_radius">12dp</dimen>
+    <dimen name="input_radius">12dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+    <dimen name="card_padding_h">16dp</dimen>
+    <dimen name="gap_small">4dp</dimen>
+    <dimen name="gap_medium">8dp</dimen>
+    <dimen name="gap_normal">10dp</dimen>
+    <dimen name="gap_large">16dp</dimen>
+    <dimen name="gap_xl">24dp</dimen>
+
+    <dimen name="text_xs">9sp</dimen>
+    <dimen name="text_sm">11sp</dimen>
+    <dimen name="text_base">13sp</dimen>
+    <dimen name="text_md">14sp</dimen>
+    <dimen name="text_lg">18sp</dimen>
+    <dimen name="text_xl">22sp</dimen>
+    <dimen name="text_2xl">28sp</dimen>
+    <dimen name="text_3xl">36sp</dimen>
+
+    <dimen name="ring_size">300dp</dimen>
+    <dimen name="wall_sq_size">16dp</dimen>
+    <dimen name="wall_sq_gap">4dp</dimen>
+    <dimen name="icon_size_milestone">64dp</dimen>
+    <dimen name="timer_circle_size">100dp</dimen>
+</resources>

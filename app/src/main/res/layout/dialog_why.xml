@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2030712"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/why_title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/amber_light"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/why_sub"
+        android:textSize="12sp"
+        android:textColor="@color/text_muted"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/inp_why"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:background="@drawable/bg_input"
+        android:hint="@string/why_hint"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_muted"
+        android:textSize="13sp"
+        android:fontFamily="monospace"
+        android:padding="14dp"
+        android:gravity="top"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_primary"
+        android:text="@string/btn_save"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:textColor="@color/bg_primary"
+        android:fontFamily="monospace"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
