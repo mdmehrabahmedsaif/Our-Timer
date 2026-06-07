@@ -230,11 +230,11 @@ class MainFragment : Fragment() {
         // 4. Update Stat Card Texts & Colors
         val minInHourPct = (innerProgress * 100.0).coerceIn(0.0, 100.0)
         tvMinInHour.text = minInHourPct.formatPercentage(2)
-        updateCardColor(cardMinInHour, tvMinInHourLabel, tvMinInHour, minInHourPct)
+        updateCardColor(cardMinInHour, tvMinInHourLabel, tvMinInHour, minInHourPct, isHighlighted = false)
         
         val totalPct = (elapsedHours / (challenge.days * 24.0) * 100.0).coerceIn(0.0, 100.0)
         tvTotal.text = totalPct.formatPercentage(3)
-        updateCardColor(cardTotal, tvTotalLabel, tvTotal, totalPct)
+        updateCardColor(cardTotal, tvTotalLabel, tvTotal, totalPct, isHighlighted = true)
 
         val todayPct = ((elapsedMillis % 86400000.0) / 86400000.0 * 100.0).coerceIn(0.0, 100.0)
         tvToday.text = todayPct.formatPercentage(2)
@@ -263,11 +263,19 @@ class MainFragment : Fragment() {
         tvFooter.text = getString(R.string.label_ends, endMillis.toDateString())
     }
 
-    private fun updateCardColor(cardLayout: LinearLayout, labelTv: TextView, valueTv: TextView, percentage: Double) {
-        val (bgRes, textColorRes) = when {
-            percentage < 30.0 -> Pair(R.drawable.bg_card_red, R.color.red)
-            percentage < 60.0 -> Pair(R.drawable.bg_card_amber, R.color.amber)
-            else -> Pair(R.drawable.bg_card_emerald, R.color.emerald)
+    private fun updateCardColor(cardLayout: LinearLayout, labelTv: TextView, valueTv: TextView, percentage: Double, isHighlighted: Boolean) {
+        val (bgRes, textColorRes) = if (isHighlighted) {
+            when {
+                percentage < 30.0 -> Pair(R.drawable.bg_card_red_bright, R.color.red)
+                percentage < 60.0 -> Pair(R.drawable.bg_card_amber_bright, R.color.amber)
+                else -> Pair(R.drawable.bg_card_emerald_bright, R.color.emerald)
+            }
+        } else {
+            when {
+                percentage < 30.0 -> Pair(R.drawable.bg_card_red, R.color.red)
+                percentage < 60.0 -> Pair(R.drawable.bg_card_amber, R.color.amber)
+                else -> Pair(R.drawable.bg_card_emerald, R.color.emerald)
+            }
         }
         cardLayout.setBackgroundResource(bgRes)
         val colorVal = ContextCompat.getColor(requireContext(), textColorRes)
