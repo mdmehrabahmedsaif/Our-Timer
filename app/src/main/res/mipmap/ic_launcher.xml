@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Background circle for legacy launcher -->
+    <path
+        android:pathData="M 24 4 C 12.95 4 4 12.95 4 24 C 4 35.05 12.95 44 24 44 C 35.05 44 44 35.05 44 24 C 44 12.95 35.05 4 24 4 Z"
+        android:fillColor="#FF030712"/>
+
+    <!-- Inner Stopwatch body -->
+    <path
+        android:pathData="M 24 16 C 19.58 16 16 19.58 16 24 C 16 28.42 19.58 32 24 32 C 28.42 32 32 28.42 32 24 C 32 19.58 28.42 16 24 16 Z"
+        android:fillColor="#FF0A0F1E"
+        android:strokeColor="#FF818CF8"
+        android:strokeWidth="1"/>
+
+    <!-- Stopwatch top buttons -->
+    <path
+        android:pathData="M 22.5 14 h 3 v 2 h -3 z"
+        android:fillColor="#FF818CF8"/>
+    <path
+        android:pathData="M 23 13 h 2 v 1 h -2 z"
+        android:fillColor="#FF818CF8"/>
+
+    <!-- Flame in the center of stopwatch -->
+    <path
+        android:pathData="M 24 29 C 21.5 29 20.5 27.25 20.5 25.5 C 20.5 23.75 22.25 22.25 23.25 20.25 C 23.75 19.25 24 18.5 24 18.5 C 24 18.5 24.25 19.25 24.75 20.25 C 25.75 22.25 27.5 23.75 27.5 25.5 C 27.5 27.25 26.5 29 24 29 Z"
+        android:fillColor="#FFF59E0B"/>
+
+    <!-- Inner flame core (yellow glow) -->
+    <path
+        android:pathData="M 24 28 C 22.75 28 22 27 22 26 C 22 25 23 24 23.5 22.5 C 23.75 22 24 21.5 24 21.5 C 24 21.5 24.25 22 24.5 22.5 C 25 24 26 25 26 26 C 26 27 25.25 28 24 28 Z"
+        android:fillColor="#FFFBBF24"/>
+
+</vector>

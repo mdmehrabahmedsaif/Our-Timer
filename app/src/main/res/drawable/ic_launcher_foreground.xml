@@ -1,0 +1,62 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Center is at (54, 54) -->
+    <!-- Safe zone is within 72x72 dp centered at (54, 54), i.e., from 18 to 90 -->
+
+    <!-- Glow/Shadow for outer ring -->
+    <path
+        android:pathData="M 54 26 A 28 28 0 1 1 53.9 26 Z"
+        android:strokeColor="#336366F1"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"/>
+
+    <!-- Outer progress ring (glowing Indigo) -->
+    <path
+        android:pathData="M 54 28 A 26 26 0 1 1 28.5 59"
+        android:strokeColor="#FF6366F1"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"/>
+
+    <!-- Outer progress ring remaining path (muted/dark indigo) -->
+    <path
+        android:pathData="M 28.5 59 A 26 26 0 0 1 54 28"
+        android:strokeColor="#2E6366F1"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"/>
+
+    <!-- Inner Stopwatch body -->
+    <path
+        android:pathData="M 54 36 C 44.06 36 36 44.06 36 54 C 36 63.94 44.06 72 54 72 C 63.94 72 72 63.94 72 54 C 72 44.06 63.94 36 54 36 Z"
+        android:fillColor="#FF0A0F1E"
+        android:strokeColor="#FF818CF8"
+        android:strokeWidth="2"/>
+
+    <!-- Stopwatch top buttons -->
+    <path
+        android:pathData="M 51 32 h 6 v 4 h -6 z"
+        android:fillColor="#FF818CF8"/>
+    <path
+        android:pathData="M 52 30 h 4 v 2 h -4 z"
+        android:fillColor="#FF818CF8"/>
+
+    <!-- Stopwatch side buttons (diagonal) -->
+    <path
+        android:pathData="M 64.5 38.5 L 67.5 41.5 L 66 43 L 63 40 Z"
+        android:fillColor="#FF818CF8"/>
+
+    <!-- Flame in the center of stopwatch (representing streak/challenge) -->
+    <path
+        android:pathData="M 54 64 C 49 64 47 60.5 47 57 C 47 53.5 50.5 50.5 52.5 46.5 C 53.5 44.5 54 43 54 43 C 54 43 54.5 44.5 55.5 46.5 C 57.5 50.5 61 53.5 61 57 C 61 60.5 59 64 54 64 Z"
+        android:fillColor="#FFF59E0B"/>
+
+    <!-- Inner flame core (yellow glow) -->
+    <path
+        android:pathData="M 54 62 C 51.5 62 50 60 50 58 C 50 56 52 54 53 51 C 53.5 50 54 49 54 49 C 54 49 54.5 50 55 51 C 56 54 58 56 58 58 C 58 60 56.5 62 54 62 Z"
+        android:fillColor="#FFFBBF24"/>
+
+</vector>
