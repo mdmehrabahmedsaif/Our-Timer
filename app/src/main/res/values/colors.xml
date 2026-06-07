@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Background -->
-    <color name="bg_primary">#FF030712</color>
-    <color name="bg_card">#FF0A0F1E</color>
-    <color name="bg_surface_05">#FF0D1117</color>
-    <color name="bg_surface_08">#FF141B2D</color>
+    <color name="bg_primary">#FFF9FAFB</color>
+    <color name="bg_card">#FFFFFFFF</color>
+    <color name="bg_surface_05">#FFF3F4F6</color>
+    <color name="bg_surface_08">#FFE5E7EB</color>
 
     <!-- Indigo -->
-    <color name="indigo">#FF6366F1</color>
-    <color name="indigo_light">#FF818CF8</color>
-    <color name="indigo_dark">#FF1E1B4B</color>
-    <color name="indigo_bg">#146366F1</color>
-    <color name="indigo_border">#2E6366F1</color>
+    <color name="indigo">#FF4F46E5</color>
+    <color name="indigo_light">#FF6366F1</color>
+    <color name="indigo_dark">#FFE0E7FF</color>
+    <color name="indigo_bg">#1A4F46E5</color>
+    <color name="indigo_border">#3D4F46E5</color>
 
     <!-- Emerald -->
-    <color name="emerald">#FF10B981</color>
-    <color name="emerald_light">#FF34D399</color>
-    <color name="emerald_dark">#FF021A0F</color>
-    <color name="emerald_bg">#1210B981</color>
-    <color name="emerald_border">#2E10B981</color>
+    <color name="emerald">#FF059669</color>
+    <color name="emerald_light">#FF10B981</color>
+    <color name="emerald_dark">#FFE6F4EA</color>
+    <color name="emerald_bg">#1A059669</color>
+    <color name="emerald_border">#3D059669</color>
 
     <!-- Amber -->
-    <color name="amber">#FFF59E0B</color>
-    <color name="amber_light">#FFFBBF24</color>
-    <color name="amber_bg">#0DF59E0B</color>
-    <color name="amber_border">#26F59E0B</color>
+    <color name="amber">#FFD97706</color>
+    <color name="amber_light">#FFF59E0B</color>
+    <color name="amber_bg">#1AD97706</color>
+    <color name="amber_border">#3DD97706</color>
 
     <!-- Red -->
-    <color name="red">#FFEF4444</color>
-    <color name="red_light">#FFF87171</color>
-    <color name="red_bg">#14EF4444</color>
-    <color name="red_border">#33EF4444</color>
+    <color name="red">#FFDC2626</color>
+    <color name="red_light">#FFEF4444</color>
+    <color name="red_bg">#1ADC2626</color>
+    <color name="red_border">#3DDC2626</color>
 
     <!-- Text -->
-    <color name="text_primary">#FFF9FAFB</color>
-    <color name="text_secondary">#FF9CA3AF</color>
-    <color name="text_muted">#FF6B7280</color>
-    <color name="text_dim">#FF374151</color>
-    <color name="text_dark">#FF1F2937</color>
+    <color name="text_primary">#FF111827</color>
+    <color name="text_secondary">#FF4B5563</color>
+    <color name="text_muted">#FF9CA3AF</color>
+    <color name="text_dim">#FFD1D5DB</color>
+    <color name="text_dark">#FFE5E7EB</color>
 
-    <!-- Surface -->
-    <color name="surface_white_05">#0DFFFFFF</color>
-    <color name="surface_white_10">#1AFFFFFF</color>
-    <color name="surface_white_04">#0AFFFFFF</color>
+    <!-- Surface (Re-bound to black transparent for light mode overlays) -->
+    <color name="surface_white_05">#0A000000</color>
+    <color name="surface_white_10">#14000000</color>
+    <color name="surface_white_04">#08000000</color>
 
     <!-- Transparent -->
     <color name="transparent">#00000000</color>

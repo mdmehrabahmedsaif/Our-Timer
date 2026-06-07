@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base Background Color -->
     <item>
-        <color android:color="#FF030712"/>
+        <color android:color="@color/bg_primary"/>
     </item>
     
     <!-- Top Left Indigo Blob -->
@@ -13,7 +13,7 @@
                 android:gradientRadius="280dp"
                 android:centerX="0.0"
                 android:centerY="0.0"
-                android:startColor="#146366F1"
+                android:startColor="@color/indigo_bg"
                 android:endColor="#00000000" />
         </shape>
     </item>
@@ -26,7 +26,7 @@
                 android:gradientRadius="220dp"
                 android:centerX="1.0"
                 android:centerY="1.0"
-                android:startColor="#1210B981"
+                android:startColor="@color/emerald_bg"
                 android:endColor="#00000000" />
         </shape>
     </item>

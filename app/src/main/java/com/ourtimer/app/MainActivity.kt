@@ -12,10 +12,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var repository: ChallengeRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        repository = ChallengeRepository(this)
+        applyTheme(repository.getThemeMode())
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        repository = ChallengeRepository(this)
 
         if (savedInstanceState == null) {
             val challenges = repository.getAll()
@@ -27,6 +28,15 @@ class MainActivity : AppCompatActivity() {
                 navigateTo(MainFragment(), addToBackStack = false)
             }
         }
+    }
+
+    fun applyTheme(mode: String) {
+        val nightMode = when (mode) {
+            "light" -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+            "dark" -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+            else -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        }
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(nightMode)
     }
 
     fun navigateTo(fragment: Fragment, addToBackStack: Boolean = true) {

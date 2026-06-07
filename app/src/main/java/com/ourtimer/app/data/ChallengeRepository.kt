@@ -109,6 +109,14 @@ class ChallengeRepository(context: Context) {
         save(challenge)
     }
 
+    fun getThemeMode(): String {
+        return prefs.getString("theme_mode", "system") ?: "system"
+    }
+
+    fun setThemeMode(mode: String) {
+        prefs.edit().putString("theme_mode", mode).apply()
+    }
+
     private fun saveAll(challenges: List<Challenge>) {
         val json = gson.toJson(challenges)
         prefs.edit().putString(KEY_CHALLENGES, json).apply()

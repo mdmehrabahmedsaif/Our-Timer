@@ -56,8 +56,54 @@ class ListFragment : Fragment() {
             (activity as? MainActivity)?.navigateTo(AddFragment())
         }
 
+        // Theme selection setup
+        val btnLight: TextView = view.findViewById(R.id.btn_theme_light)
+        val btnDark: TextView = view.findViewById(R.id.btn_theme_dark)
+        val btnSystem: TextView = view.findViewById(R.id.btn_theme_system)
+
+        val onThemeClick = View.OnClickListener { v ->
+            v.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
+            val newMode = when (v.id) {
+                R.id.btn_theme_light -> "light"
+                R.id.btn_theme_dark -> "dark"
+                else -> "system"
+            }
+            repository.setThemeMode(newMode)
+            updateThemeSelectors(newMode, view)
+            
+            // Apply theme dynamically in MainActivity
+            (activity as? MainActivity)?.applyTheme(newMode)
+        }
+
+        btnLight.setOnClickListener(onThemeClick)
+        btnDark.setOnClickListener(onThemeClick)
+        btnSystem.setOnClickListener(onThemeClick)
+
+        updateThemeSelectors(repository.getThemeMode(), view)
+
         setupRecyclerView()
         updateAddButtonVisibility()
+    }
+
+    private fun updateThemeSelectors(currentMode: String, view: View) {
+        val btnLight: TextView = view.findViewById(R.id.btn_theme_light)
+        val btnDark: TextView = view.findViewById(R.id.btn_theme_dark)
+        val btnSystem: TextView = view.findViewById(R.id.btn_theme_system)
+
+        val activeBg = R.drawable.bg_pill_active
+        val inactiveBg = R.drawable.bg_pill
+        
+        val activeTextColor = androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_primary)
+        val inactiveTextColor = androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_secondary)
+
+        btnLight.setBackgroundResource(if (currentMode == "light") activeBg else inactiveBg)
+        btnLight.setTextColor(if (currentMode == "light") activeTextColor else inactiveTextColor)
+
+        btnDark.setBackgroundResource(if (currentMode == "dark") activeBg else inactiveBg)
+        btnDark.setTextColor(if (currentMode == "dark") activeTextColor else inactiveTextColor)
+
+        btnSystem.setBackgroundResource(if (currentMode == "system") activeBg else inactiveBg)
+        btnSystem.setTextColor(if (currentMode == "system") activeTextColor else inactiveTextColor)
     }
 
     private fun getSortedChallenges(): List<Challenge> {

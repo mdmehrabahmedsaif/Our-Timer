@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -32,6 +34,16 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    applicationVariants.configureEach {
+        val variant = this
+        outputs.configureEach {
+            val output = this as? ApkVariantOutputImpl
+            if (output != null) {
+                output.outputFileName = "Our-Timer.apk"
+            }
+        }
     }
 }
 
