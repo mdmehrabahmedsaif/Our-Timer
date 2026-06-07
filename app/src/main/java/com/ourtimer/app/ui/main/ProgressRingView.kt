@@ -45,7 +45,7 @@ class ProgressRingView @JvmOverloads constructor(
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.text_muted)
         textSize = 10.dpToPx(context)
-        fontFamily = Typeface.MONOSPACE
+        typeface = Typeface.MONOSPACE
         textAlign = Paint.Align.CENTER
         letterSpacing = 0.15f
     }
@@ -53,7 +53,7 @@ class ProgressRingView @JvmOverloads constructor(
     private val timePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, R.color.text_primary)
         textSize = 36.dpToPx(context)
-        fontFamily = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD)
+        typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD)
         textAlign = Paint.Align.CENTER
     }
 

@@ -36,7 +36,7 @@ class WallOfDaysView @JvmOverloads constructor(
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         textSize = 9.dpToPx(context)
-        fontFamily = Typeface.MONOSPACE
+        typeface = Typeface.MONOSPACE
         textAlign = Paint.Align.CENTER
         color = Color.WHITE
     }

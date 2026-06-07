@@ -131,7 +131,7 @@ class MainFragment : Fragment() {
             val textView = TextView(context).apply {
                 text = challenge.name
                 textSize = 11f
-                fontFamily = android.graphics.Typeface.MONOSPACE
+                typeface = android.graphics.Typeface.MONOSPACE
                 setPadding(
                     (14 * context.resources.displayMetrics.density).toInt(),
                     (6 * context.resources.displayMetrics.density).toInt(),
