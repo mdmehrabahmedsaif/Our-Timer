@@ -73,11 +73,11 @@ class WallOfDaysView @JvmOverloads constructor(
         val progress = time / 1000f
         val pulseAlpha = 0.75f + 0.25f * Math.sin(progress * 2.0 * Math.PI).toFloat() // Oscillates between 0.5 and 1.0
 
-        val cx = width / 2f
         val cy = height / 2f
         val halfCell = cellWidth / 2f
-
-        val rect = RectF(cx - halfCell, cy - halfCell, cx + halfCell, cy + halfCell)
+        val left = paddingLeft.toFloat() + shadowPadding
+        val top = cy - halfCell
+        val rect = RectF(left, top, left + cellWidth, top + cellWidth)
         val cornerRadius = 3.dpToPx(context)
 
         if (isCompleted) {
