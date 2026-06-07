@@ -8,7 +8,7 @@
     <string name="label_min_in_hour">MIN IN HOUR</string>
     <string name="label_total">TOTAL</string>
     <string name="label_today">TODAY</string>
-    <string name="label_wall_of_days">WALL OF DAYS</string>
+    <string name="label_wall_of_days">STATUS</string>
     <string name="btn_struggling">I\'m Struggling</string>
     <string name="label_ends">ENDS %s</string>
     <string name="label_next_milestone">NEXT MILESTONE: DAY %d</string>
