@@ -4,10 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
-import com.ourtimer.app.R
 import com.ourtimer.app.utils.dpToPx
-import kotlin.math.ceil
 
 class WallOfDaysView @JvmOverloads constructor(
     context: Context,
@@ -18,66 +15,50 @@ class WallOfDaysView @JvmOverloads constructor(
     private var totalDays = 60
     private var elapsedDays = 0f
 
-    private val completedPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val colorPast = Color.parseColor("#10b981")
+    private val colorToday = Color.parseColor("#6366f1")
+    private val colorFuture = Color.parseColor("#111827")
+
+    private val pastPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
+        color = colorPast
     }
 
-    private val activePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val todayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
-    }
-
-    private val activeBorderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.STROKE
+        color = colorToday
     }
 
     private val futurePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
+        color = colorFuture
     }
 
-    private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 9.dpToPx(context)
-        typeface = Typeface.MONOSPACE
-        textAlign = Paint.Align.CENTER
-        color = Color.WHITE
-    }
+    private val cellWidth = 16.dpToPx(context)
+    private val spacing = 4.dpToPx(context)
+    private val cornerRadius = 3.dpToPx(context)
 
-    private val spacing = 6.dpToPx(context)
-    private val cornerRadius = 4.dpToPx(context)
-
-    // Pulsing animation variables
-    private var pulseAlpha = 1.0f
-    private var pulseDirection = -1
+    // Pulse animation handler
     private val pulseRunnable = object : Runnable {
         override fun run() {
-            pulseAlpha += pulseDirection * 0.05f
-            if (pulseAlpha <= 0.3f) {
-                pulseAlpha = 0.3f
-                pulseDirection = 1
-            } else if (pulseAlpha >= 1.0f) {
-                pulseAlpha = 1.0f
-                pulseDirection = -1
-            }
             invalidate()
-            postDelayed(this, 50)
+            postDelayed(this, 30) // 30fps for smooth pulse
         }
     }
 
     init {
-        completedPaint.color = ContextCompat.getColor(context, R.color.emerald)
-        activePaint.color = ContextCompat.getColor(context, R.color.amber)
-        activeBorderPaint.apply {
-            color = ContextCompat.getColor(context, R.color.amber_light)
-            strokeWidth = 2.dpToPx(context)
-        }
-        // Dark card/surface background for future days
-        futurePaint.color = Color.parseColor("#151D30")
-
-        // Start pulse animation
+        // Enable software layer to render glow shadows
+        setLayerType(LAYER_TYPE_SOFTWARE, null)
+        
+        // Static shadow for past days (6dp blur, 40% opacity)
+        pastPaint.setShadowLayer(6.dpToPx(context), 0f, 0f, Color.argb(102, 16, 185, 129))
+        
         post(pulseRunnable)
     }
 
     fun setDays(total: Int, elapsed: Float) {
-        this.totalDays = total
+        // Clamp total days to max 90 squares
+        this.totalDays = Math.min(total, 90)
         this.elapsedDays = elapsed
         requestLayout()
         invalidate()
@@ -85,9 +66,10 @@ class WallOfDaysView @JvmOverloads constructor(
 
     private fun getColumns(): Int {
         return when {
+            totalDays <= 30 -> 6
             totalDays <= 60 -> 10
-            totalDays <= 120 -> 12
-            else -> 15
+            totalDays <= 120 -> 10
+            else -> 10
         }
     }
 
@@ -95,14 +77,14 @@ class WallOfDaysView @JvmOverloads constructor(
         val width = MeasureSpec.getSize(widthMeasureSpec)
         val columns = getColumns()
         
-        // Calculate cell size based on width and spacing
+        // Calculate cell size based on width and spacing to dynamically fit screen
         val totalSpacingWidth = spacing * (columns - 1)
         val availableWidth = width - paddingLeft - paddingRight - totalSpacingWidth
-        val cellWidth = availableWidth / columns
+        val cellSide = availableWidth / columns
 
-        val rows = ceil(totalDays.toFloat() / columns).toInt()
+        val rows = Math.ceil(totalDays.toDouble() / columns).toInt()
         val totalSpacingHeight = spacing * (rows - 1)
-        val totalHeight = (cellWidth * rows) + totalSpacingHeight + paddingTop + paddingBottom
+        val totalHeight = (cellSide * rows) + totalSpacingHeight + paddingTop + paddingBottom
 
         setMeasuredDimension(width, totalHeight.toInt())
     }
@@ -113,53 +95,50 @@ class WallOfDaysView @JvmOverloads constructor(
         val columns = getColumns()
         val totalSpacingWidth = spacing * (columns - 1)
         val availableWidth = width - paddingLeft - paddingRight - totalSpacingWidth
-        val cellWidth = availableWidth / columns
+        val cellSide = availableWidth / columns
 
-        val activeDayIndex = elapsedDays.toInt() // 0-indexed active day
+        val activeDayIndex = elapsedDays.toInt() // 0-indexed day for today
+
+        // Calculate smooth pulse: 2 second cycle (2000ms), opacity from 0.6 to 1.0
+        val time = System.currentTimeMillis() % 2000
+        val progress = time / 2000f
+        val pulseAlpha = 0.8f + 0.2f * Math.sin(progress * 2.0 * Math.PI).toFloat() // Oscillates between 0.6 and 1.0
+
+        // Set dynamic glowing shadow and opacity for today's cell
+        todayPaint.alpha = (pulseAlpha * 255).toInt()
+        todayPaint.setShadowLayer(
+            10.dpToPx(context), 
+            0f, 
+            0f, 
+            Color.argb((153 * pulseAlpha).toInt(), 99, 102, 241) // 60% opacity max
+        )
 
         for (i in 0 until totalDays) {
             val row = i / columns
             val col = i % columns
 
-            val left = paddingLeft + col * (cellWidth + spacing)
-            val top = paddingTop + row * (cellWidth + spacing)
-            val right = left + cellWidth
-            val bottom = top + cellWidth
+            val left = paddingLeft + col * (cellSide + spacing)
+            val top = paddingTop + row * (cellSide + spacing)
+            val right = left + cellSide
+            val bottom = top + cellSide
 
             val rect = RectF(left, top, right, bottom)
 
             when {
-                // Completed days
+                // Past completed days
                 i < activeDayIndex -> {
-                    canvas.drawRoundRect(rect, cornerRadius, cornerRadius, completedPaint)
-                    drawDayNumber(canvas, i + 1, rect)
+                    canvas.drawRoundRect(rect, cornerRadius, cornerRadius, pastPaint)
                 }
                 // Today (Active day)
                 i == activeDayIndex && elapsedDays < totalDays -> {
-                    canvas.drawRoundRect(rect, cornerRadius, cornerRadius, activePaint)
-                    
-                    // Pulsing glowing border
-                    activeBorderPaint.alpha = (pulseAlpha * 255).toInt()
-                    val inset = 1.dpToPx(context)
-                    val borderRect = RectF(left - inset, top - inset, right + inset, bottom + inset)
-                    canvas.drawRoundRect(borderRect, cornerRadius + inset, cornerRadius + inset, activeBorderPaint)
-
-                    textPaint.color = Color.BLACK
-                    drawDayNumber(canvas, i + 1, rect)
+                    canvas.drawRoundRect(rect, cornerRadius, cornerRadius, todayPaint)
                 }
                 // Future days
                 else -> {
                     canvas.drawRoundRect(rect, cornerRadius, cornerRadius, futurePaint)
-                    textPaint.color = ContextCompat.getColor(context, R.color.text_muted)
-                    drawDayNumber(canvas, i + 1, rect)
                 }
             }
         }
-    }
-
-    private fun drawDayNumber(canvas: Canvas, day: Int, rect: RectF) {
-        val textY = rect.centerY() - ((textPaint.descent() + textPaint.ascent()) / 2f)
-        canvas.drawText(day.toString(), rect.centerX(), textY, textPaint)
     }
 
     override fun onDetachedFromWindow() {
