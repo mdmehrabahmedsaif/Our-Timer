@@ -13,6 +13,7 @@ class WhyDialog : DialogFragment() {
 
     interface WhyListener {
         fun onWhySaved(whyText: String)
+        fun onWhyLater()
     }
 
     private var currentWhyText: String = ""
@@ -49,16 +50,28 @@ class WhyDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Disable dismissal on background tap or back press
+        isCancelable = false
+
         val inpWhy: EditText = view.findViewById(R.id.inp_why)
         val btnSave: TextView = view.findViewById(R.id.btn_save)
+        val btnLater: TextView = view.findViewById(R.id.btn_later)
 
         inpWhy.setText(currentWhyText)
-        // Focus cursor at the end of the text
         inpWhy.setSelection(inpWhy.text.length)
 
         btnSave.setOnClickListener {
+            // Trigger light click vibration
+            it.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
             val updatedWhy = inpWhy.text.toString().trim()
             listener?.onWhySaved(updatedWhy)
+            dismiss()
+        }
+
+        btnLater.setOnClickListener {
+            // Trigger light click vibration
+            it.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
+            listener?.onWhyLater()
             dismiss()
         }
     }

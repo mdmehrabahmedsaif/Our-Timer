@@ -19,8 +19,50 @@ class ChallengeRepository(context: Context) {
     fun getAll(): List<Challenge> {
         val json = prefs.getString(KEY_CHALLENGES, null) ?: return emptyList()
         return try {
-            val type = object : TypeToken<List<Challenge>>() {}.type
-            gson.fromJson(json, type) ?: emptyList()
+            val jsonArray = gson.fromJson(json, com.google.gson.JsonArray::class.java)
+            val list = mutableListOf<Challenge>()
+            for (element in jsonArray) {
+                val obj = element.asJsonObject
+                val id = obj.get("id").asString
+                val name = obj.get("name").asString
+                
+                val days = if (obj.has("days")) {
+                    obj.get("days").asInt
+                } else if (obj.has("totalDays")) {
+                    obj.get("totalDays").asInt
+                } else {
+                    60
+                }
+                
+                val alterEgo = obj.get("alterEgo").asString
+                
+                val startTime = if (obj.has("startTime")) {
+                    obj.get("startTime").asLong
+                } else if (obj.has("startDate")) {
+                    obj.get("startDate").asLong
+                } else {
+                    System.currentTimeMillis()
+                }
+                
+                val why = if (obj.has("why")) obj.get("why").asString else ""
+                val lastWhyPromptDate = if (obj.has("lastWhyPromptDate")) obj.get("lastWhyPromptDate").asString else ""
+                
+                val shownMilestones = mutableListOf<Int>()
+                if (obj.has("shownMilestones")) {
+                    val array = obj.getAsJsonArray("shownMilestones")
+                    for (m in array) {
+                        shownMilestones.add(m.asInt)
+                    }
+                } else if (obj.has("milestoneShown")) {
+                    val legacyVal = obj.get("milestoneShown").asInt
+                    if (legacyVal > 0) {
+                        shownMilestones.add(legacyVal)
+                    }
+                }
+                
+                list.add(Challenge(id, name, days, alterEgo, startTime, why, lastWhyPromptDate, shownMilestones))
+            }
+            list
         } catch (e: Exception) {
             emptyList()
         }

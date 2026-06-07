@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary"
+    android:background="@drawable/bg_app_main"
     android:fillViewport="true"
     android:scrollbars="none">
 
@@ -105,6 +104,7 @@
 
             <!-- MIN IN HOUR - Full Width -->
             <LinearLayout
+                android:id="@+id/layout_card_min_in_hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_card_emerald"
@@ -113,6 +113,7 @@
                 android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/tv_min_in_hour_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_min_in_hour"
@@ -141,6 +142,7 @@
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
+                    android:id="@+id/layout_card_total"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -151,6 +153,7 @@
                     android:layout_marginEnd="5dp">
 
                     <TextView
+                        android:id="@+id/tv_total_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_total"

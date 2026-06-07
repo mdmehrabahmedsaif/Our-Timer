@@ -33,7 +33,7 @@
     <string name="alter_silent_storm">Silent Storm</string>
 
     <!-- Contract -->
-    <string name="contract_text">আমি প্রতিজ্ঞা করছি যে %1$s থেকে %2$d দিন দূরে থাকব।</string>
+    <string name="contract_text">আমি, %1$s, প্রতিজ্ঞা করছি যে %2$s থেকে %3$d দিন দূরে থাকব।</string>
 
     <!-- Milestone -->
     <string name="milestone_title">%d Days!</string>

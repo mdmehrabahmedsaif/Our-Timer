@@ -45,4 +45,14 @@ class MainActivity : AppCompatActivity() {
         }
         transaction.commit()
     }
+
+    @Suppress("DEPRECATION")
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+        } else {
+            // Minimize the app instead of closing it when on root Main screen
+            moveTaskToBack(true)
+        }
+    }
 }

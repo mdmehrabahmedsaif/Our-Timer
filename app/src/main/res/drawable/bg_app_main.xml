@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Base Background Color -->
+    <item>
+        <color android:color="#FF030712"/>
+    </item>
+    
+    <!-- Top Left Indigo Blob -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="280dp"
+                android:centerX="0.0"
+                android:centerY="0.0"
+                android:startColor="#146366F1"
+                android:endColor="#00000000" />
+        </shape>
+    </item>
+    
+    <!-- Bottom Right Green Blob -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="220dp"
+                android:centerX="1.0"
+                android:centerY="1.0"
+                android:startColor="#1210B981"
+                android:endColor="#00000000" />
+        </shape>
+    </item>
+</layer-list>

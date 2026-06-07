@@ -5,14 +5,17 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.ourtimer.app.R
+import com.ourtimer.app.data.ChallengeRepository
 import java.util.Locale
 
 class StrugglingDialog : DialogFragment() {
 
     private var countdownTimer: CountDownTimer? = null
+    private lateinit var repository: ChallengeRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +34,28 @@ class StrugglingDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Disable dismissal on background tap or back press
+        isCancelable = false
+
+        repository = ChallengeRepository(requireContext())
+
         val tvTimer: TextView = view.findViewById(R.id.tv_timer)
         val btnClose: TextView = view.findViewById(R.id.btn_close)
+        val layoutWhy: LinearLayout = view.findViewById(R.id.layout_why)
+        val tvWhyText: TextView = view.findViewById(R.id.tv_why_text)
+
+        // Bind why text if available in the active challenge
+        val activeChallenge = repository.getActiveChallenge()
+        if (activeChallenge != null && activeChallenge.why.isNotEmpty()) {
+            layoutWhy.visibility = View.VISIBLE
+            tvWhyText.text = activeChallenge.why
+        } else {
+            layoutWhy.visibility = View.GONE
+        }
 
         btnClose.setOnClickListener {
+            // Trigger light haptic click feedback
+            it.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
             dismiss()
         }
 

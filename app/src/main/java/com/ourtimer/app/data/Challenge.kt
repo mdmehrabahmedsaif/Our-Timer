@@ -3,9 +3,10 @@ package com.ourtimer.app.data
 data class Challenge(
     val id: String,
     val name: String,
-    val totalDays: Int,
+    val days: Int,
     val alterEgo: String,
-    val startDate: Long,
+    val startTime: Long,
     var why: String = "",
-    var milestoneShown: Int = 0
+    var lastWhyPromptDate: String = "",
+    val shownMilestones: MutableList<Int> = mutableListOf()
 )

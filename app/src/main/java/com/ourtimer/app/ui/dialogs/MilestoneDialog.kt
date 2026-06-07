@@ -50,10 +50,16 @@ class MilestoneDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Disable dismissal on background tap or back press
+        isCancelable = false
+
         val ivIcon: ImageView = view.findViewById(R.id.iv_icon)
         val tvTitle: TextView = view.findViewById(R.id.tv_title)
         val tvSub: TextView = view.findViewById(R.id.tv_sub)
         val btnContinue: TextView = view.findViewById(R.id.btn_continue)
+
+        // Trigger strong haptic vibration when celebration overlay opens
+        view.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
 
         // Set milestone data
         tvTitle.text = getString(R.string.milestone_title, milestoneDay)
@@ -80,6 +86,8 @@ class MilestoneDialog : DialogFragment() {
             .start()
 
         btnContinue.setOnClickListener {
+            // Trigger light haptic vibration
+            it.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP)
             dismiss()
             listener?.onMilestoneDismissed()
         }

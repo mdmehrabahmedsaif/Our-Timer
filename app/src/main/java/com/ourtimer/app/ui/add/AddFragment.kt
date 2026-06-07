@@ -3,6 +3,7 @@ package com.ourtimer.app.ui.add
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.ourtimer.app.MainActivity
 import com.ourtimer.app.R
@@ -26,6 +28,11 @@ class AddFragment : Fragment() {
     private lateinit var inpDays: EditText
     private lateinit var inpAlter: EditText
     private lateinit var tvContract: TextView
+
+    private lateinit var optChampion: TextView
+    private lateinit var optIron: TextView
+    private lateinit var optWarrior: TextView
+    private lateinit var optStorm: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +53,10 @@ class AddFragment : Fragment() {
         inpAlter = view.findViewById(R.id.inp_alter)
         tvContract = view.findViewById(R.id.tv_contract)
         
-        val optChampion: TextView = view.findViewById(R.id.opt_champion)
-        val optIron: TextView = view.findViewById(R.id.opt_iron)
-        val optWarrior: TextView = view.findViewById(R.id.opt_warrior)
+        optChampion = view.findViewById(R.id.opt_champion)
+        optIron = view.findViewById(R.id.opt_iron)
+        optWarrior = view.findViewById(R.id.opt_warrior)
+        optStorm = view.findViewById(R.id.opt_storm)
         val btnSave: TextView = view.findViewById(R.id.btn_save)
 
         // Hide back button if no challenges exist (app forced to create one first)
@@ -66,10 +74,23 @@ class AddFragment : Fragment() {
             }
         }
 
-        // Quick select alter ego
-        optChampion.setOnClickListener { inpAlter.setText(optChampion.text) }
-        optIron.setOnClickListener { inpAlter.setText(optIron.text) }
-        optWarrior.setOnClickListener { inpAlter.setText(optWarrior.text) }
+        // Quick select alter ego with highlights
+        optChampion.setOnClickListener {
+            inpAlter.setText(optChampion.text)
+            updatePresetSelection(optChampion)
+        }
+        optIron.setOnClickListener {
+            inpAlter.setText(optIron.text)
+            updatePresetSelection(optIron)
+        }
+        optWarrior.setOnClickListener {
+            inpAlter.setText(optWarrior.text)
+            updatePresetSelection(optWarrior)
+        }
+        optStorm.setOnClickListener {
+            inpAlter.setText(optStorm.text)
+            updatePresetSelection(optStorm)
+        }
 
         // Live contract text preview updates
         val textWatcher = object : TextWatcher {
@@ -82,27 +103,65 @@ class AddFragment : Fragment() {
 
         inpName.addTextChangedListener(textWatcher)
         inpDays.addTextChangedListener(textWatcher)
+        
+        inpAlter.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                updateContractPreview()
+                
+                // Clear selection highlight if text doesn't match any preset
+                val text = s?.toString() ?: ""
+                val matchedPreset = when (text) {
+                    optChampion.text.toString() -> optChampion
+                    optIron.text.toString() -> optIron
+                    optWarrior.text.toString() -> optWarrior
+                    optStorm.text.toString() -> optStorm
+                    else -> null
+                }
+                updatePresetSelection(matchedPreset)
+            }
+        })
 
         updateContractPreview()
 
         btnSave.setOnClickListener {
+            // Trigger medium haptic feedback vibration
+            it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
             saveChallenge()
+        }
+    }
+
+    private fun updatePresetSelection(selectedView: TextView?) {
+        val presets = listOf(optChampion, optIron, optWarrior, optStorm)
+        for (preset in presets) {
+            val isActive = preset == selectedView
+            preset.setBackgroundResource(if (isActive) R.drawable.bg_pill_active else R.drawable.bg_pill)
+            preset.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (isActive) R.color.text_primary else R.color.text_secondary
+                )
+            )
         }
     }
 
     private fun updateContractPreview() {
         val name = inpName.text.toString().trim()
         val daysStr = inpDays.text.toString().trim()
+        val alter = inpAlter.text.toString().trim()
         val days = daysStr.toIntOrNull() ?: 0
 
         val namePlaceholder = if (name.isEmpty()) "______" else name
-        tvContract.text = getString(R.string.contract_text, namePlaceholder, days)
+        val alterPlaceholder = if (alter.isEmpty()) "______" else alter
+        
+        tvContract.text = getString(R.string.contract_text, alterPlaceholder, namePlaceholder, days)
     }
 
     private fun saveChallenge() {
         val name = inpName.text.toString().trim()
         val daysStr = inpDays.text.toString().trim()
-        val alter = inpAlter.text.toString().trim()
+        var alter = inpAlter.text.toString().trim()
 
         if (name.isEmpty()) {
             Toast.makeText(requireContext(), R.string.validation_name, Toast.LENGTH_SHORT).show()
@@ -115,23 +174,36 @@ class AddFragment : Fragment() {
             return
         }
 
-        if (alter.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.validation_alter, Toast.LENGTH_SHORT).show()
+        // Max challenges limit of 10
+        if (repository.getAll().size >= 10) {
+            Toast.makeText(requireContext(), "You cannot have more than 10 challenges.", Toast.LENGTH_LONG).show()
             return
+        }
+
+        // If Alter ego is empty, use challenge name as default
+        if (alter.isEmpty()) {
+            alter = name
         }
 
         val newChallenge = Challenge(
             id = UUID.randomUUID().toString(),
             name = name,
-            totalDays = days,
+            days = days,
             alterEgo = alter,
-            startDate = System.currentTimeMillis(),
+            startTime = System.currentTimeMillis(),
             why = "",
-            milestoneShown = 0
+            lastWhyPromptDate = "",
+            shownMilestones = mutableListOf()
         )
 
         repository.save(newChallenge)
-        repository.setActiveChallengeId(newChallenge.id)
+        
+        // Find index of the newly added challenge to set it as active
+        val allChallenges = repository.getAll()
+        val newIndex = allChallenges.indexOfFirst { it.id == newChallenge.id }
+        if (newIndex != -1) {
+            repository.setActiveChallengeId(newChallenge.id)
+        }
 
         // Clear fragment backstack and navigate to MainFragment
         (activity as? MainActivity)?.navigateTo(MainFragment(), addToBackStack = false)

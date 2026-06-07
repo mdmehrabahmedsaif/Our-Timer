@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ourtimer.app.MainActivity
 import com.ourtimer.app.R
+import com.ourtimer.app.data.Challenge
 import com.ourtimer.app.data.ChallengeRepository
 import com.ourtimer.app.ui.add.AddFragment
 import com.ourtimer.app.ui.main.MainFragment
@@ -21,6 +22,7 @@ class ListFragment : Fragment() {
     private lateinit var repository: ChallengeRepository
     private lateinit var adapter: ChallengeAdapter
     private lateinit var rvChallenges: RecyclerView
+    private lateinit var btnAdd: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +38,7 @@ class ListFragment : Fragment() {
         repository = ChallengeRepository(requireContext())
 
         val btnBack: ImageButton = view.findViewById(R.id.btn_back)
-        val btnAdd: TextView = view.findViewById(R.id.btn_add)
+        btnAdd = view.findViewById(R.id.btn_add)
         rvChallenges = view.findViewById(R.id.rv_challenges)
 
         btnBack.setOnClickListener {
@@ -53,15 +55,32 @@ class ListFragment : Fragment() {
         }
 
         setupRecyclerView()
+        updateAddButtonVisibility()
+    }
+
+    private fun getSortedChallenges(): List<Challenge> {
+        val originalList = repository.getAll()
+        val now = System.currentTimeMillis()
+        
+        // Sort: Completed challenges below active challenges, preserving stable original add order (oldest first)
+        return originalList.sortedBy { challenge ->
+            val elapsedMillis = now - challenge.startTime
+            val elapsedDays = elapsedMillis.toDouble() / (24.0 * 60.0 * 60.0 * 1000.0)
+            if (elapsedDays >= challenge.days) 1 else 0
+        }
+    }
+
+    private fun updateAddButtonVisibility() {
+        val count = repository.getAll().size
+        btnAdd.visibility = if (count >= 10) View.GONE else View.VISIBLE
     }
 
     private fun setupRecyclerView() {
-        val challenges = repository.getAll()
+        val sortedList = getSortedChallenges()
         adapter = ChallengeAdapter(
-            challenges,
+            sortedList,
             onItemClick = { challenge ->
                 repository.setActiveChallengeId(challenge.id)
-                // Go back to Main Screen
                 (activity as? MainActivity)?.navigateTo(MainFragment(), addToBackStack = false)
             },
             onDeleteClick = { challenge ->
@@ -73,18 +92,17 @@ class ListFragment : Fragment() {
         rvChallenges.adapter = adapter
     }
 
-    private fun showDeleteConfirmation(challenge: com.ourtimer.app.data.Challenge) {
+    private fun showDeleteConfirmation(challenge: Challenge) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.delete_confirm)
             .setPositiveButton(R.string.yes) { _, _ ->
                 repository.delete(challenge.id)
-                // Refresh list
-                val updated = repository.getAll()
+                val updated = getSortedChallenges()
                 if (updated.isEmpty()) {
-                    // No challenges left, go to Add Screen directly
                     (activity as? MainActivity)?.navigateTo(AddFragment(), addToBackStack = false)
                 } else {
                     adapter.updateData(updated)
+                    updateAddButtonVisibility()
                 }
             }
             .setNegativeButton(R.string.no, null)

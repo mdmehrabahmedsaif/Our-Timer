@@ -41,12 +41,17 @@ class ChallengeAdapter(
         private val btnDelete: ImageButton = itemView.findViewById(R.id.btn_delete)
 
         fun bind(challenge: Challenge) {
-            tvName.text = challenge.name
+            val displayName = if (challenge.name.length > 15) {
+                challenge.name.take(15) + "..."
+            } else {
+                challenge.name
+            }
+            tvName.text = displayName
 
-            val elapsedMillis = System.currentTimeMillis() - challenge.startDate
-            val elapsedDays = elapsedMillis.toDouble() / (24 * 60 * 60 * 1000)
+            val elapsedMillis = System.currentTimeMillis() - challenge.startTime
+            val elapsedDays = elapsedMillis.toDouble() / (24.0 * 60.0 * 60.0 * 1000.0)
             
-            val pct = ((elapsedDays / challenge.totalDays) * 100.0).coerceIn(0.0, 100.0)
+            val pct = ((elapsedDays / challenge.days) * 100.0).coerceIn(0.0, 100.0)
             tvPct.text = pct.formatPercentage(2)
 
             // Color code progress percentage
@@ -57,14 +62,9 @@ class ChallengeAdapter(
             }
             tvPct.textColor(colorRes)
 
-            val currentDay = elapsedDays.toInt() + 1
-            if (elapsedDays >= challenge.totalDays) {
-                tvSub.text = itemView.context.getString(R.string.completed)
-                tvSub.setTextColor(ContextCompat.getColor(itemView.context, R.color.emerald))
-            } else {
-                tvSub.text = String.format(Locale.US, "DAY %d OF %d", currentDay, challenge.totalDays)
-                tvSub.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_muted))
-            }
+            val daysLeft = (challenge.days - elapsedDays).coerceAtLeast(0.0).toInt()
+            tvSub.text = String.format(Locale.US, "%d days left · %s", daysLeft, challenge.alterEgo)
+            tvSub.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_muted))
 
             itemView.setOnClickListener { onItemClick(challenge) }
             btnDelete.setOnClickListener { onDeleteClick(challenge) }
