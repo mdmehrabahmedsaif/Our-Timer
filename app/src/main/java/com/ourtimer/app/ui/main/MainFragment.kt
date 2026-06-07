@@ -211,8 +211,10 @@ class MainFragment : Fragment() {
         val innerProgress = (elapsedMsInHour.toDouble() / 3600000.0).coerceIn(0.0, 1.0).toFloat()
 
         // 3. Time Text: Countdown format
-        val minRemaining = 60L - (elapsedMsInHour / 60000L)
-        val secRemaining = 60L - ((elapsedMsInHour / 1000L) % 60L)
+        val elapsedSecs = elapsedMsInHour / 1000L
+        val remainingSecs = 3599L - elapsedSecs
+        val minRemaining = remainingSecs / 60L
+        val secRemaining = remainingSecs % 60L
         
         val minText = String.format(Locale.US, "%02dm", minRemaining)
         val secText = String.format(Locale.US, "%02ds", secRemaining)
